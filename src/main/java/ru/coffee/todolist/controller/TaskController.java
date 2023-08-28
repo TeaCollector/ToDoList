@@ -43,15 +43,17 @@ public class TaskController {
 
 //    Delete Task
 
-    @GetMapping("/task-delete/{id}")
+    @GetMapping("/delete-task/{id}")
     public String deleteTask(@PathVariable("id") Long id) {
         taskService.deleteTask(id);
         return "redirect:/task";
     }
 
 //    Update Task
-    @GetMapping("/update-task")
-    public String updateTask() {
+    @GetMapping("/update-task/{id}")
+    public String updateTask(@PathVariable("id") Long id, Model model) {
+        Task task = taskService.findById(id);
+        model.addAttribute("task", task);
         return "update-task";
     }
 
